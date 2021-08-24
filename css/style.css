@@ -84,3 +84,8 @@ h2 {
   align-items: center;
   margin: 15px 0;
 }
+
+.pwCopied {
+  text-align: center;
+  margin-top: 1rem;
+}

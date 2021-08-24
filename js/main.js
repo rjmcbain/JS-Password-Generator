@@ -27,16 +27,21 @@ clipboardEl.addEventListener("click", () => {
   textarea.select();
   document.execCommand("copy");
   textarea.remove();
-  alert("Password copied to clipboard!");
+
+  const container = document.querySelector(".container");
+  const newDiv = document.createElement("div");
+  newDiv.classList.add("pwCopied");
+  newDiv.innerText = "Password copied to clipboard!";
+  container.appendChild(newDiv);
+  // alert('Password copied to clipboard!')
 });
 
 generateEl.addEventListener("click", () => {
   const length = +lengthEl.value;
-  const hasLower = lowercaseEl.checked;
   const hasUpper = uppercaseEl.checked;
+  const hasLower = lowercaseEl.checked;
   const hasNumber = numbersEl.checked;
   const hasSymbol = symbolsEl.checked;
-
   resultEl.innerText = generatePassword(
     hasLower,
     hasUpper,
@@ -44,6 +49,11 @@ generateEl.addEventListener("click", () => {
     hasSymbol,
     length
   );
+
+  const newDiv = document.querySelector(".pwCopied");
+  if (newDiv) {
+    newDiv.remove();
+  }
 });
 
 function generatePassword(lower, upper, number, symbol, length) {
@@ -70,17 +80,15 @@ function generatePassword(lower, upper, number, symbol, length) {
 }
 
 function getRandomLower() {
-  return String.fromCharCode(Math.floor(Math.random() * 26) + 97);
+  return String.fromCharCode(Math.floor(Math.random() * 26 + 97));
 }
 
 function getRandomUpper() {
-  return String.fromCharCode(Math.floor(Math.random() * 26) + 65);
+  return String.fromCharCode(Math.floor(Math.random() * 26 + 65));
 }
-
 function getRandomNumber() {
-  return String.fromCharCode(Math.floor(Math.random() * 10) + 48);
+  return String.fromCharCode(Math.floor(Math.random() * 10 + 48));
 }
-
 function getRandomSymbol() {
   const symbols = "!@#$%^&*(){}[]=<>/,.";
   return symbols[Math.floor(Math.random() * symbols.length)];
